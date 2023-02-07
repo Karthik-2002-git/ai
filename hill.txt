@@ -1,0 +1,18 @@
+def hill_climbing(problem, n_iters):
+    # Initialize a random solution
+    current_solution = problem.random_solution()
+    
+    for i in range(n_iters):
+        # Generate a set of possible new solutions by making small changes to the current solution
+        neighbors = problem.neighbors(current_solution)
+        
+        # Select the best solution from the set of neighbors
+        best_neighbor = max(neighbors, key=problem.value)
+        
+        # If the best neighbor solution is better than the current solution, move to the best neighbor
+        if problem.value(best_neighbor) > problem.value(current_solution):
+            current_solution = best_neighbor
+        else:
+            # If no neighbor is better, stop and return the current solution
+            return current_solution
+    return current_solution
